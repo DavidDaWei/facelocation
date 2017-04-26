@@ -1,0 +1,50 @@
+private int[] HSV2RGB(float h, float s, float v) {
+		s = s / 100; // 百分比換成小數
+		v = v / 100;// 百分比換成小數
+		int[] rgb = new int[3];
+
+		float r_plum = 0;
+		float g_plum = 0;
+		float b_plum = 0;
+
+		float C = s * v;
+		float X;
+		if ((((h / 60) % 2) - 1) >= 0) {
+			X = C * (1 - (((h / 60) % 2) - 1));
+		} else {
+			X = C * (1 - (((h / 60) % 2) - 1) * (-1));
+		}
+
+		float M = v - C;
+		if (h >= 0 && h < 60) {
+			r_plum = C;
+			g_plum = X;
+			b_plum = 0;
+		} else if (h >= 60 && h < 120) {
+			r_plum = X;
+			g_plum = C;
+			b_plum = 0;
+		} else if (h >= 120 && h < 180) {
+			r_plum = 0;
+			g_plum = C;
+			b_plum = X;
+		} else if (h >= 180 && h < 240) {
+			r_plum = 0;
+			g_plum = X;
+			b_plum = C;
+		} else if (h >= 240 && h < 300) {
+			r_plum = X;
+			g_plum = 0;
+			b_plum = C;
+		} else if (h >= 300 && h < 360) {
+			r_plum = C;
+			g_plum = 0;
+			b_plum = X;
+		}
+
+		rgb[0] = Math.round((r_plum + M) * 255);
+		rgb[1] = Math.round((g_plum + M) * 255);
+		rgb[2] = Math.round((b_plum + M) * 255);
+
+		return rgb;
+	}
