@@ -1,0 +1,19 @@
+	/** 第一線運算公式: 二值化圖片 (先做灰階) **/
+	public BufferedImage PicBinary(BufferedImage sourceImg, int Width, int Height, int FZ) {
+		int arr[][] = getImageGrayArray(sourceImg, Width, Height);// 灰階陣列獲得
+		BufferedImage image = new BufferedImage(Width, Height, BufferedImage.TYPE_BYTE_BINARY);
+		// int FZ = 80;
+		// int black = new Color(0, 0, 0).getRGB();
+		// int white = new Color(255, 255, 255).getRGB();
+		// int red = new Color(255, 0, 0).getRed();
+		for (int i = 0; i < Width; i++) {
+			for (int j = 0; j < Height; j++) {
+				if (arr[i][j] >= FZ) {
+					image.setRGB(i, j, Color.white.getRGB());
+				} else {
+					image.setRGB(i, j, Color.black.getRGB());
+				}
+			}
+		}
+		return image;
+	}
