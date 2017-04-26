@@ -1,0 +1,58 @@
+/** RGB 轉換成 HSV **/
+	private int[] RGB2HSV(int RGB) {
+		float r_plum;
+		float g_plum;
+		float b_plum;
+		float h = 0;
+		float s = 0;
+		float v = 0;
+
+		int[] hsv = new int[3];
+
+		float r = (RGB & 0xff0000) >> 16;// &是要讓B跟G歸零，然後因為他是R 在最前面
+		// 0x-RRBBGG
+		// 所以要取得，必須往後移4個位元(2進制)
+		float g = (RGB & 0x00ff00) >> 8;// &是要讓R跟G歸零，然後因為他是B 在最前面
+		// 0x-RRBBGG
+		// 所以要取得，必須往後移3個位元(2進制)
+		float b = RGB & 0x0000ff;// &是要讓R跟B歸零
+
+		// 0-255 to 0-1
+		r_plum = r / 255;
+		g_plum = g / 255;
+		b_plum = b / 255;
+
+		float[] rgbArr = { r, g, b };
+		Arrays.sort(rgbArr);
+		float max = Math.round(rgbArr[2]);
+		float min = Math.round(rgbArr[0]);
+		max /= 255;
+		min /= 255;
+		float delta = max - min;
+
+		// found hue
+		if (delta == 0) {
+			h = 0;
+		} else if (max == r_plum) {
+			h = 60 * ((g_plum - b_plum) / delta % 6);
+		} else if (max == g_plum) {
+			h = 60 * (((b_plum - r_plum) / delta) + 2);
+		} else if (max == b_plum) {
+			h = 60 * (((r_plum - g_plum) / delta) + 4);
+		} else {
+			System.out.println("h is error");
+		}
+		// found saturation
+		if (max == 0) {
+			s = 0;
+		} else {
+			s = ((delta * 100) / (max * 100));
+		}
+		// found value
+		v = max;
+
+		hsv[0] = Math.round(h);
+		hsv[1] = Math.round(s * 100);
+		hsv[2] = Math.round(v * 100);
+		return hsv;
+	}
