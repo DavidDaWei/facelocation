@@ -1,0 +1,102 @@
+// 連通標記演算法(二值圖)
+	private int[][][][] ConnectedComponent(BufferedImage image) {
+
+		int ConnectedTag = 0;// 標記初始化
+		int width = image.getWidth();
+		int height = image.getHeight();
+		// 資訊 _寬 _高 _標籤 例子:[1][120][150][1] [0][0][0][0] = ConnectedTag(有幾個白色區塊)
+		int[][][][] arr = new int[2][width][height][1];
+		// 全頻掃描
+		for (int x = 1; x < width - 1; x++) {
+			for (int y = 1; y < height - 1; y++) {
+				if (iswhite(image.getRGB(x, y))) {
+
+					if (0 != arr[1][x - 1][y][0]) {
+						if (arr[1][x - 1][y][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x - 1][y][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x - 1][y - 1][0]) {
+
+						if (arr[1][x - 1][y - 1][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x - 1][y - 1][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x][y - 1][0]) {
+
+						if (arr[1][x][y - 1][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x][y - 1][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x + 1][y - 1][0]) {
+
+						if (arr[1][x + 1][y - 1][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x + 1][y - 1][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x + 1][y][0]) {
+
+						if (arr[1][x + 1][y][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x + 1][y][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x + 1][y + 1][0]) {
+
+						if (arr[1][x + 1][y + 1][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x + 1][y + 1][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x][y + 1][0]) {
+
+						if (arr[1][x][y + 1][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x][y + 1][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+
+					if (0 != arr[1][x - 1][y + 1][0]) {
+
+						if (arr[1][x - 1][y + 1][0] < ConnectedTag) {
+							// System.out.println("a:" + x + "," + y);
+							ConnectedTag = arr[1][x - 1][y + 1][0];
+							arr[1][x][y][0] = ConnectedTag;
+						}
+					}
+					// 四周都是空的
+					// 給予新Tag編號
+
+					// System.out.println("新加入tag = " + ConnectedTag + "座標:
+
+					if (0 == arr[1][x][y][0]) {
+
+						ConnectedTag += 1;
+						// System.out.println("新加入tag = " + ConnectedTag + "
+						// ,座標:" + x + "," + y);
+						arr[1][x][y][0] = ConnectedTag;
+					}
+				}
+			}
+		}
+		arr[0][0][0][0] = ConnectedTag;
+		System.out.println("ConnectedTag: " + ConnectedTag);
+		return arr;
+	}
