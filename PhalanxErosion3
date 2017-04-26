@@ -1,0 +1,28 @@
+/** 方陣型侵蝕白色PhalanxErosion **/
+	private BufferedImage PhalanxErosion(BufferedImage image) {
+
+		int w = image.getWidth();
+		int h = image.getHeight();
+		for (int x = 1; x < w - 1; x += 3) {
+			for (int y = 1; y < h - 1; y += 3) {
+
+				// 白色 =16777215
+				if (!iswhite(image.getRGB(x, y))) {
+
+					int color = Color.black.getRGB();
+					image.setRGB(x, y, color);
+					image.setRGB(x, y - 1, color);
+					image.setRGB(x, y + 1, color);
+					image.setRGB(x - 1, y, color);
+					image.setRGB(x + 1, y, color);
+
+					/* 8 */
+					image.setRGB(x - 1, y - 1, color);
+					image.setRGB(x + 1, y - 1, color);
+					image.setRGB(x - 1, y + 1, color);
+					image.setRGB(x + 1, y + 1, color);
+				}
+			}
+		}
+		return image;
+	}
