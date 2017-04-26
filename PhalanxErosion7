@@ -1,0 +1,72 @@
+/** 方陣型侵蝕白色PhalanxErosionTriple 7*7**/
+	private BufferedImage PhalanxErosionTriple(BufferedImage image){
+
+		int w = image.getWidth();
+		int h = image.getHeight();
+		for (int x = 3; x < w - 3; x += 7) {
+			for (int y = 3; y < h - 3; y += 7) {
+
+				// 白色 =16777215
+				if (!iswhite(image.getRGB(x, y))) {
+
+					int color = Color.black.getRGB();
+					image.setRGB(x, y, color);
+					image.setRGB(x, y - 1, color);
+					image.setRGB(x, y + 1, color);
+					image.setRGB(x - 1, y, color);
+					image.setRGB(x + 1, y, color);
+
+					/* 8 */
+					image.setRGB(x - 1, y - 1, color);
+					image.setRGB(x + 1, y - 1, color);
+					image.setRGB(x - 1, y + 1, color);
+					image.setRGB(x + 1, y + 1, color);
+					
+					/*雙層*/
+					image.setRGB(x - 2, y - 2, color);//
+					image.setRGB(x - 1, y - 2, color);//
+					image.setRGB(x    , y - 2, color);//
+					image.setRGB(x + 1, y - 2, color);//
+					image.setRGB(x + 2, y - 2, color);//
+					image.setRGB(x + 2, y - 1, color);//
+					image.setRGB(x + 2, y    , color);//
+					image.setRGB(x + 2, y + 1, color);//
+					image.setRGB(x + 2, y + 2, color);//
+					image.setRGB(x + 1, y + 2, color);//
+					image.setRGB(x    , y + 2, color);//
+					image.setRGB(x - 1, y + 2, color);//
+					image.setRGB(x - 2, y + 2, color);//
+					image.setRGB(x - 2, y + 1, color);//
+					image.setRGB(x - 2, y    , color);//
+					image.setRGB(x - 2, y - 1, color);//
+					
+					/*第三層*/
+					image.setRGB(x - 3, y - 3, color);//
+					image.setRGB(x - 2, y - 3, color);//
+					image.setRGB(x - 1, y - 3, color);//					
+					image.setRGB(x    , y - 3, color);//
+					image.setRGB(x + 1, y - 3, color);//
+					image.setRGB(x + 2, y - 3, color);//
+					image.setRGB(x + 3, y - 3, color);//
+					image.setRGB(x + 3, y - 2, color);//
+					image.setRGB(x + 3, y - 1, color);//					
+					image.setRGB(x + 3, y    , color);//
+					image.setRGB(x + 3, y + 1, color);//
+					image.setRGB(x + 3, y + 2, color);//
+					image.setRGB(x + 3, y + 3, color);//
+					image.setRGB(x + 2, y + 3, color);//
+					image.setRGB(x + 1, y + 3, color);//					
+					image.setRGB(x    , y + 3, color);//
+					image.setRGB(x - 1, y + 3, color);//
+					image.setRGB(x - 2, y + 3, color);//
+					image.setRGB(x - 3, y + 3, color);//
+					image.setRGB(x - 3, y + 2, color);//
+					image.setRGB(x - 3, y + 1, color);//
+					image.setRGB(x - 3, y    , color);//
+					image.setRGB(x - 3, y - 1, color);//
+					image.setRGB(x - 3, y - 2, color);//
+				}
+			}
+		}
+		return image;
+	}
